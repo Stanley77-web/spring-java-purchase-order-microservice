@@ -6,7 +6,7 @@ create table if not exists users (
 
 create table if not exists login_histories (
     id int auto_increment primary key,
-    user_id int not null,
+    user_id int,
     login_time datetime not null,
     is_successful boolean not null,
     login_log text,

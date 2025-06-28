@@ -14,6 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EncryptionService encryptionService;
+
+    @Autowired
+    private HashService hashService;
+
     public UserEntity createUser(UserEntity user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new ResponseStatusException(
@@ -21,6 +27,12 @@ public class UserService {
                     "Username already taken"
             );
         }
+
+        user.setPassword(
+                this.hashService.hashPassword(
+                        this.encryptionService.decrypt(user.getPassword())
+                )
+        );
 
         return userRepository.save(user);
     }
@@ -44,12 +56,17 @@ public class UserService {
                         "User not found"
                 ));
 
-        userEntity.setUsername(user.getUsername());
-        userEntity.setPassword(user.getPassword());
 
-        System.out.println(userEntity);
+        userEntity.setUsername(user.getUsername());
+        userEntity.setPassword(
+                this.hashService.hashPassword(
+                        this.encryptionService.decrypt(user.getPassword())
+                )
+        );
 
         userRepository.save(userEntity);
+
+        userEntity.setPassword(null);
 
         return userEntity;
     }

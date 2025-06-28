@@ -11,6 +11,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Boolean existsByUsername(String username);
 
-    @Query("SELECT u FROM UserEntity u WHERE u.username = :username AND u.password = :password")
-    Optional<UserEntity> login(String username, String password);
+    Optional<UserEntity> findByUsername(String username);
 }

@@ -23,21 +23,41 @@ public class LoginService {
     @Autowired
     private JwtService jwtService;
 
-    public LoginDto login(UserEntity user) {
+    @Autowired
+    private EncryptionService encryptionService;
+
+    @Autowired
+    private HashService hashService;
+
+    public LoginDto login(UserEntity user){
         LoginHistoryEntity loginHistory = new LoginHistoryEntity();
 
         String username = user.getUsername();
-        String password = user.getPassword();
+        String password = encryptionService.decrypt(user.getPassword());
 
-        UserEntity userData = userRepository.login(username, password)
+        UserEntity userData = userRepository.findByUsername(username)
                 .orElseThrow(() -> {
 
                     loginHistory.setSuccessful(false);
+                    loginHistory.setLoginTime(LocalDateTime.now());
                     loginHistory.setLoginLog("Failed login attempt for username: " + username);
+
+                    loginHistoryRepository.save(loginHistory);
 
 
                     return new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
                 });
+
+        if (!hashService.matchPassword(password, userData.getPassword())) {
+
+            loginHistory.setSuccessful(false);
+            loginHistory.setLoginTime(LocalDateTime.now());
+            loginHistory.setLoginLog("Failed login attempt for username: " + username);
+
+            loginHistoryRepository.save(loginHistory);
+
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
+        }
 
 
         loginHistory.setUser(userData);
