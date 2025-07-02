@@ -1,5 +1,6 @@
 package com.dans.javaonboard.product.services;
 
+import com.dans.javaonboard.product.dtos.ActivationProductOrderDto;
 import com.dans.javaonboard.product.dtos.OutBoundResponseDto;
 import com.dans.javaonboard.product.dtos.ProductDataDto;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,7 +25,7 @@ public class ProductService {
     @Cacheable("outbound:products")
     public ProductDataDto getAllProduct() {
         RequestEntity<Void> requestEntity = RequestEntity
-                .get("/product ")
+                .get("/product")
                 .build();
         ParameterizedTypeReference<
                 OutBoundResponseDto<
@@ -45,13 +46,17 @@ public class ProductService {
         return response.getData();
     }
 
-    public String activateProduct(String productId) {
+    public String activateProduct(String productId, String username) {
         ProductDataDto productData = this.getAllProduct();
 
         for (ProductDataDto.ProductDto product : productData.getProducts()) {
             if (product.getProductId().equals(productId)) {
+                ActivationProductOrderDto activationProductOrderDto = new ActivationProductOrderDto(
+                        productId,
+                        username
+                );
 
-                kafkaProducerService.publishActivationOrder(productId);
+                kafkaProducerService.publishActivationOrder(activationProductOrderDto);
 
                 return "Activation product with ID: " + productId + " has being processed successfully";
             }

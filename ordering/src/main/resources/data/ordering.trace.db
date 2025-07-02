@@ -1,0 +1,3 @@
+2025-07-01 01:11:50.546060+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table if not exists transaction_histories ( id varchar(50) primary key, product_id varchar(50) not null, create_at datetime not null, create_by varchar(50) not null, [*])"; expected "identifier"; SQL statement:
+create table if not exists transaction_histories ( id varchar(50) primary key, product_id varchar(50) not null, create_at datetime not null, create_by varchar(50) not null, ) [42001-232]

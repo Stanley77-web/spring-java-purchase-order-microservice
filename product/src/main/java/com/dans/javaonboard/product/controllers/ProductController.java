@@ -19,6 +19,6 @@ public class ProductController {
 
     @PostMapping("{productId}/activate")
     public ResponseEntity<String> activateProduct(@PathVariable("productId") String productId) {
-        return ResponseEntity.ok(productService.activateProduct(productId));
+        return ResponseEntity.ok(productService.activateProduct(productId, "system"));
     }
 }
