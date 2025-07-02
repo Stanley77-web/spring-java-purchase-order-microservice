@@ -10,7 +10,7 @@ public class RestTemplateConfig {
     @Bean
     public RestTemplate restTemplateOutBound(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder
-                .rootUri("https://dev6.dansmultipro.com/java/dans/onboard/java/")
+                .rootUri(System.getenv("HOST_NAME_OUTBOUND"))
                 .basicAuthentication(
                         System.getenv("BASIC_USERNAME_OUTBOUND"),
                         System.getenv("BASIC_PASSWORD_OUTBOUND")

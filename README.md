@@ -1,4 +1,4 @@
-# Java Microservices Onboard Project
+# Spring Java Purchase Order Microservices Project (OrderYuk)
 
 A comprehensive microservices architecture built with Spring Boot, Spring Cloud, and event-driven messaging using Apache Kafka. This project demonstrates modern enterprise-level Java development practices with service discovery, API gateway, caching, and asynchronous communication.
 

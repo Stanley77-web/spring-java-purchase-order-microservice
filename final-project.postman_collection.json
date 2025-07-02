@@ -96,17 +96,28 @@
 				{
 					"name": "Get User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwLjc0MTQ5OTA0Mzc4ODc2NDUiLCJpYXQiOjE3NTE0NzM5NDcsImlzcyI6ImFkbWluIiwiZXhwIjoxNzUxNDc3NTQ3LCJ1c2VybmFtZSI6ImFkbWluIn0.un68DMSNipk51DuBiCqwj0vjLoaP7cWpkhGL673fR10\"",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5001/api/v1/users/1",
+							"raw": "http://localhost:9090/api/authentication/v1/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5001",
+							"port": "9090",
 							"path": [
 								"api",
+								"authentication",
 								"v1",
 								"users",
 								"1"
@@ -132,10 +143,15 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"password\": \"123456\"\r\n}"
+							"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"password\": \"Bt+cr46eTx7pa1Y49zG9Aw==\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/api/authentication/v1/users/1/update",
+							"raw": "http://localhost:9090/api/authentication/v1/users/2/update",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -146,7 +162,7 @@
 								"authentication",
 								"v1",
 								"users",
-								"1",
+								"2",
 								"update"
 							]
 						}
@@ -210,13 +226,14 @@
 							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5002/product/v1/products",
+							"raw": "http://localhost:9090/api/product/v1/products",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5002",
+							"port": "9090",
 							"path": [
+								"api",
 								"product",
 								"v1",
 								"products"
@@ -231,17 +248,18 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5002/product/v1/products/P00001/activate",
+							"raw": "http://localhost:9090/api/product/v1/products/P00002/activate",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5002",
+							"port": "9090",
 							"path": [
+								"api",
 								"product",
 								"v1",
 								"products",
-								"P00001",
+								"P00002",
 								"activate"
 							]
 						}
@@ -256,21 +274,32 @@
 				{
 					"name": "Ordering Histories",
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwLjkyNzIzODE0MzAyMDkzNDEiLCJpYXQiOjE3NTE0NzUwNDYsImlzcyI6ImFkbWluMSIsImV4cCI6MTc1MTQ3ODY0NiwidXNlcm5hbWUiOiJhZG1pbjEifQ.Tu3XZWTzozmDjtBEZz-H4DG0mRT58sSB75KdoHsm-Co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5002/product/v1/products/P00001/activate",
+							"raw": "http://localhost:9090/api/ordering/v1/orders/admin/histories",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5002",
+							"port": "9090",
 							"path": [
-								"product",
+								"api",
+								"ordering",
 								"v1",
-								"products",
-								"P00001",
-								"activate"
+								"orders",
+								"admin",
+								"histories"
 							]
 						}
 					},
