@@ -76,8 +76,7 @@ public class OrderingService {
                 transactionId,
                 productId,
                 LocalDateTime.now(),
-                "system"
-        );
+                username        );
 
         transactionHistoriesRepository.save(transactionHistoriesEntity);
     }

@@ -1,6 +1,6 @@
 package com.dans.javaonboard.gateway;
 
-import com.dans.javaonboard.gateway.loadbalancer.ServiceLoadBalancerConfig;
+import com.dans.javaonboard.gateway.loadbalancers.ServiceLoadBalancerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

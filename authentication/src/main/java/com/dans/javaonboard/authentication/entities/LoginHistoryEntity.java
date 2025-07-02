@@ -29,7 +29,7 @@ public class LoginHistoryEntity {
     @Column(name = "logout_time")
     private LocalDateTime logoutTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 }

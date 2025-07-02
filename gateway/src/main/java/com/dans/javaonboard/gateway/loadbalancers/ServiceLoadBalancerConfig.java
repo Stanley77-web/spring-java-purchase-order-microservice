@@ -1,4 +1,4 @@
-package com.dans.javaonboard.gateway.loadbalancer;
+package com.dans.javaonboard.gateway.loadbalancers;
 
 import org.springframework.cloud.loadbalancer.core.RandomLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ReactorServiceInstanceLoadBalancer;

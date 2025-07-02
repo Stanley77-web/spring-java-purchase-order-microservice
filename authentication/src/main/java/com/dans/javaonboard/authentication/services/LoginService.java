@@ -1,16 +1,22 @@
 package com.dans.javaonboard.authentication.services;
 
 import com.dans.javaonboard.authentication.dtos.LoginDto;
+import com.dans.javaonboard.authentication.dtos.UserDto;
+import com.dans.javaonboard.authentication.dtos.VerifyTokenDto;
 import com.dans.javaonboard.authentication.entities.LoginHistoryEntity;
 import com.dans.javaonboard.authentication.entities.UserEntity;
 import com.dans.javaonboard.authentication.repositories.LoginHistoryRepository;
 import com.dans.javaonboard.authentication.repositories.UserRepository;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class LoginService {
@@ -71,5 +77,18 @@ public class LoginService {
         loginDto.setToken(jwtService.createToken(userData.getUsername()));
 
         return loginDto;
+    }
+
+    public VerifyTokenDto verifyToken(HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("claims");
+
+        request.setAttribute("claims", null);
+
+        return new VerifyTokenDto(
+                "success",
+                new UserDto(
+                        (String) claims.get("username")
+                )
+        );
     }
 }

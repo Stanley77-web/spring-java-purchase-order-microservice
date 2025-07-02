@@ -1,9 +1,11 @@
 package com.dans.javaonboard.authentication.controllers;
 
 import com.dans.javaonboard.authentication.dtos.LoginDto;
+import com.dans.javaonboard.authentication.dtos.VerifyTokenDto;
 import com.dans.javaonboard.authentication.entities.UserEntity;
 import com.dans.javaonboard.authentication.services.LoginService;
 import com.dans.javaonboard.authentication.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,5 +30,10 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<UserEntity> register(@RequestBody UserEntity user) {
         return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<VerifyTokenDto> verifyToken(HttpServletRequest request) {
+        return ResponseEntity.ok(loginService.verifyToken(request));
     }
 }

@@ -1,4 +1,4 @@
-package com.dans.javaonboard.authentication.dtos;
+package com.dans.javaonboard.product.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDto {
-    private String token;
+public class UserDto {
+    String username;
 }

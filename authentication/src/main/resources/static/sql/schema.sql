@@ -11,5 +11,5 @@ create table if not exists login_histories (
     is_successful boolean not null,
     login_log text,
     logout_time datetime,
-    foreign key (user_id) references users(id)
+    foreign key (user_id) references users(id) on delete cascade
 );
